@@ -1,0 +1,6 @@
+input CreatePostInput {
+    title: String!
+    content: String!
+    author: String!
+    hashtags: [String!]
+}

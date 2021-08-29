@@ -1,0 +1,4 @@
+input UpdateCommentInput {
+    id: String!
+    description: String!
+}

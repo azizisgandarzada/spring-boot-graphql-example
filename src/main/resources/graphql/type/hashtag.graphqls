@@ -1,0 +1,4 @@
+type Hashtag {
+    id: ID
+    name: String
+}

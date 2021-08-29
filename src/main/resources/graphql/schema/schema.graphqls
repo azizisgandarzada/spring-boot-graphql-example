@@ -1,0 +1,21 @@
+type Schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    posts(page: Int!, size: Int!): [Post!]!
+    post(id: String!): Post!
+
+    comments(postId: String!, page: Int!, size: Int!): [Comment!]!
+}
+
+type Mutation {
+    createPost(post: CreatePostInput!): Post!
+    updatePost(post: UpdatePostInput!): Post!
+    deletePost(id: String!): Boolean!
+
+    createComment(comment: CreateCommentInput!): Comment!
+    updateComment(comment: UpdateCommentInput!): Comment!
+    deleteComment(id: String!): Boolean!
+}

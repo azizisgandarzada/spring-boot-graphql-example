@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-boot-graphql-example
+  profiles:
+    active:
+      - db
+      - server

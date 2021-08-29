@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "0fbb6098-2ff6-44dd-ad22-b37f0595a34b",
+		"name": "Spring Boot GraphQL Example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Posts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetPosts($page: Int = 0, $size: Int = 20, $fetchHashtags: Boolean!) {\n    posts(page: $page, size: $size) {\n        id,\n        ...titleAndContent\n      \tauthor,\t\n        ... on Post {\n                likeCount\n           }\n        viewCount,\n        createdAt,\n        hashtags @include(if: $fetchHashtags){\n            id,\n            name\n      }\n  }\n}\n\nfragment titleAndContent on Post {\n    title,\n    content\n}",
+						"variables": "{\n    \"page\": 0,\n    \"size\": 20,\n    \"fetchHashtags\": true\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post Comments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetPostsAndComments($postId: String!, $page: Int = 0, $size: Int = 20) {\n  comments(postId: $postId, page: $page, size: $size){\n      id,\n      description,\n      author,\n      createdAt\n  }\n}",
+						"variables": "{\n    \"postId\": \"6474fd12-e042-4b08-8cd8-e670c1221049\",\n    \"page\": 0,\n    \"size\": 20,\n    \"fetchHashtags\": true\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query GetPostById($id: String!, $fetchHashtags: Boolean!) {\n    post(id: $id) {\n        id,\n        title,\n        content,\n      \tauthor,\t\n    \t\tlikeCount,\n    \t\tviewCount,\n    \t\tcreatedAt,\n       hashtags @include(if: $fetchHashtags){\n        id,\n        name\n      }\n  }\n}",
+						"variables": "{\n    \"id\": \"e79f3a63-b6fe-4edc-945c-c12a7ea6ea89\",\n    \"fetchHashtags\": true\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post By Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeletePostById($id: String!) {\n    deletePost(id: $id)\n}",
+						"variables": "{\n    \"id\": \"d9ea1b7e-923b-4020-98a7-12eb94d2a93d\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation  {\n  createdPost: createPost(post: {\n      title: \"test\",\n      content: \"Hello World1\",\n      author: \"Azizi\",\n      hashtags : [\"#test\", \"#hello\"]\n    }){\n        id,\n        title,\n        content\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation  ($id: String!) {\n  updatedPost:  updatePost(post: {\n      id: $id\n      title: \"Hello 2\",\n      content: \"Hello World10\",\n      hashtags : [\"#new\", \"#old\"]\n    }){\n        id,\n        title,\n        content\n    }\n}",
+						"variables": "{\n    \"id\":\"5d525a67-7058-4cd8-a1be-4244628476d9\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation  CreateComment($postId: String!) {\n    createdComment: createComment(comment: {\n      description: \"Good post\",\n      author: \"Elbrus\",\n      postId : $postId\n    }) {\n        id,\n        description\n    }\n}",
+						"variables": "{\n    \"postId\":\"6474fd12-e042-4b08-8cd8-e670c1221049\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation  UpdateComment($id: String!) {\n    updatedComment: updateComment(comment: {\n      id: $id\n      description: \"Good post42\"\n    }) {\n        id,\n        description\n    }\n}",
+						"variables": "{\n    \"id\":\"d9becb8d-eb25-424e-8e10-695ffdcbc9fd\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteComment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteComment($id: String!) {\n    deleteComment(id: $id)\n}",
+						"variables": "{\n    \"id\":\"9b0e7c79-e2e8-40cd-99b9-bd344eb473b5\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

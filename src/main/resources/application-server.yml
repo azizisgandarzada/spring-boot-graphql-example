@@ -1,0 +1,9 @@
+server:
+  port: 8080
+graphql:
+  servlet:
+    mapping: /graphql
+  playground:
+    enabled: true
+voyager:
+  enabled: true

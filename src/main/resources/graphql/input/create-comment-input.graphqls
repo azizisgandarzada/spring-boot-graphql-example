@@ -1,0 +1,5 @@
+input CreateCommentInput {
+    description: String!
+    author: String!
+    postId: String!
+}
