@@ -4,6 +4,7 @@ import com.azizi.graphql.dto.response.HashtagResponseDto;
 import com.azizi.graphql.dto.response.PostResponseDto;
 import com.azizi.graphql.service.HashtagService;
 import graphql.kickstart.tools.GraphQLResolver;
+import graphql.schema.DataFetchingEnvironment;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class PostFieldResolver implements GraphQLResolver<PostResponseDto> {
     private final HashtagService hashtagService;
 
     @Transactional(readOnly = true)
-    public List<HashtagResponseDto> getHashtags(PostResponseDto postResponseDto) {
+    public List<HashtagResponseDto> getHashtags(PostResponseDto postResponseDto, DataFetchingEnvironment environment) {
         return hashtagService.getHashtags(postResponseDto.getId());
     }
 
