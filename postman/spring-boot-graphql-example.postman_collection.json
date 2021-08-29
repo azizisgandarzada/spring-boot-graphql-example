@@ -138,7 +138,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation  ($id: String!) {\n  updatedPost:  updatePost(post: {\n      id: $id\n      title: \"Hello 2\",\n      content: \"Hello World10\",\n      hashtags : [\"#new\", \"#old\"]\n    }){\n        id,\n        title,\n        content\n    }\n}",
+						"query": "mutation ($id: String!) {\n  updatedPost:  updatePost(post: {\n      id: $id\n      title: \"Hello 2\",\n      content: \"Hello World10\",\n      hashtags : [\"#new\", \"#old\"]\n    }){\n        id,\n        title,\n        content\n    }\n}",
 						"variables": "{\n    \"id\":\"5d525a67-7058-4cd8-a1be-4244628476d9\"\n}"
 					}
 				},
@@ -163,7 +163,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation  CreateComment($postId: String!) {\n    createdComment: createComment(comment: {\n      description: \"Good post\",\n      author: \"Elbrus\",\n      postId : $postId\n    }) {\n        id,\n        description\n    }\n}",
+						"query": "mutation CreateComment($postId: String!) {\n    createdComment: createComment(comment: {\n      description: \"Good post\",\n      author: \"Elbrus\",\n      postId : $postId\n    }) {\n        id,\n        description\n    }\n}",
 						"variables": "{\n    \"postId\":\"6474fd12-e042-4b08-8cd8-e670c1221049\"\n}"
 					}
 				},
@@ -188,7 +188,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation  UpdateComment($id: String!) {\n    updatedComment: updateComment(comment: {\n      id: $id\n      description: \"Good post42\"\n    }) {\n        id,\n        description\n    }\n}",
+						"query": "mutation UpdateComment($id: String!) {\n    updatedComment: updateComment(comment: {\n      id: $id\n      description: \"Good post42\"\n    }) {\n        id,\n        description\n    }\n}",
 						"variables": "{\n    \"id\":\"d9becb8d-eb25-424e-8e10-695ffdcbc9fd\"\n}"
 					}
 				},
